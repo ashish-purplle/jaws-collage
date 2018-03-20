@@ -55,6 +55,8 @@ def resize(im, target_size, max_size):
 def detect(args):
     nparr = np.fromstring(args.img, np.uint8)
     actual_img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+
+    # actual_img = cv2.resize(actual_img, (actual_img.shape[0] / 4, actual_img.shape[1] / 4))
     image = cv2.cvtColor(actual_img, cv2.COLOR_BGR2RGB)
     img  = cv2.cvtColor(actual_img, cv2.COLOR_BGR2RGB)
     #cv2.imshow("img",img)
@@ -124,8 +126,8 @@ def init(img):
                              'likely face result')
     parser.add_argument('--nms-thresh', type=float, default=0.3, help='the threshold of nms')
     parser.add_argument('--min-size', type=int, default=24, help='the min size of object')
-    parser.add_argument('--scale', type=int, default=600, help='the scale of shorter edge will be resize to')
-    parser.add_argument('--max-scale', type=int, default=1000, help='the maximize scale after resize')
+    parser.add_argument('--scale', type=int, default=200, help='the scale of shorter edge will be resize to')
+    parser.add_argument('--max-scale', type=int, default=500, help='the maximize scale after resize')
 
     args = parser.parse_args()
     #fullfilename = (os.path.join(args.input_dir, args.img_url.split('/')[-1]))

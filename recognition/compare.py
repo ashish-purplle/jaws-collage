@@ -2,6 +2,7 @@ import mxnet as mx
 import numpy as np
 import cv2
 import time
+import os
 
 def read2img(name1, name2, size, ctx):
     pair_arr = np.zeros((2, 1, size, size), dtype=float)
@@ -60,6 +61,7 @@ def compare(para,detected_face,hashtable,detected_face_id,image_id,noOfFacesInIm
     start = time.time()
     symbol = lightened_cnn_b_feature()
     response ={}
+    NOT_FOUND_STORE_PATH = "/Users/admin/Work/jaws-collage/outnew"
     if(len(hashtable) < 1):
         is_already_exist= False
         response['is_already_exist'] = False
@@ -68,6 +70,11 @@ def compare(para,detected_face,hashtable,detected_face_id,image_id,noOfFacesInIm
         # if flag == True:
         #     return df
         # else:
+        # folder = os.path.join(NOT_FOUND_STORE_PATH, str(response['classId']))
+        # if not os.path.exists(folder):
+        #     os.makedirs(folder)
+        # cv2.imwrite(os.path.join(folder, "{}_{}.jpg".format(detected_face_id, image_id)),
+        #             detected_face)
         return response
 
     maxClassScore = 0
@@ -96,6 +103,11 @@ def compare(para,detected_face,hashtable,detected_face_id,image_id,noOfFacesInIm
         response['is_already_exist'] = False
         response['classId'] = detected_face_id
 
+    # folder = os.path.join(NOT_FOUND_STORE_PATH, str(response['classId']))
+    # if not os.path.exists(folder):
+    #     os.makedirs(folder)
+    # cv2.imwrite(os.path.join(folder, "{}_{}.jpg".format(detected_face_id, image_id)),
+    #             detected_face)
     return response
 
     # df = buildMatrix(maxClassId,image_id,noOfFacesInImage)
